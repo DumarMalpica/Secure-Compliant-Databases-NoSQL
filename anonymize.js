@@ -8,19 +8,26 @@ async function anonimizarDatos() {
   try {
     await client.connect();
     const db = client.db("empresa");
-    const usuarios = db.collection("usuarios");
 
-    await usuarios.updateMany({}, [
-      { $set: {
-          nombre: "ANONIMO",
-          correo: { $concat: ["anon_", { $toString: "$_id" }, "@mail.com"] },
-          telefono: null
-      }}
-    ]);
+    // Colecciones separadas
+    const original = db.collection("usuarios_original");
+    const anonimizados = db.collection("usuarios_anonimizados");
 
-    console.log("✅ Datos anonimizados correctamente.");
+    const usuarios = await original.find().toArray();
+
+    for (const u of usuarios) {
+      const anon = {
+        nombre: "ANONIMO",
+        correo: `anon_${u._id}@mail.com`,
+        telefono: null,
+        ciudad: u.ciudad
+      };
+      await anonimizados.insertOne(anon);
+    }
+
+    console.log("Datos anonimizados correctamente en 'usuarios_anonimizados'.");
   } catch (err) {
-    console.error("❌ Error en anonimización:", err);
+    console.error("Error en anonimización:", err);
   } finally {
     await client.close();
   }
