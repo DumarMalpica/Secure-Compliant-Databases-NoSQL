@@ -1,0 +1,34 @@
+{
+  "name": "proyecto-privacidad-nosql",
+  "version": "1.0.0",
+  "description": "Simulación de cumplimiento normativo y anonimización de datos personales en una base de datos NoSQL (MongoDB).",
+  "main": "dataset.js",
+  "scripts": {
+    "start": "node dataset.js",
+    "anonimize": "node anonymize.js",
+    "insert": "node dataset.js"
+  },
+  "keywords": [
+    "mongodb",
+    "anonimización",
+    "gdpr",
+    "privacidad",
+    "nosql",
+    "devsecops"
+  ],
+  "author": "Dumar Malpica",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "mongodb": "^6.20.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DumarMalpica/Secure-Compliant-Databases-NoSQL.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DumarMalpica/Secure-Compliant-Databases-NoSQL/issues"
+  },
+  "homepage": "https://github.com/DumarMalpica/Secure-Compliant-Databases-NoSQL#readme"
+}
